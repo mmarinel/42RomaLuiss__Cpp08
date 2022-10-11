@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/10 16:53:26 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:02:48 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ struct s_elRandom {
 		const int	_limit;
 };
 
-template <typename T, typename F>
-void	iter( T& container, F map ) {
+template <typename T, typename FPTR>
+void	iter( T& container, FPTR map ) {
 	typename T::iterator	it;
 	typename T::iterator	end_it;
 
@@ -54,8 +54,9 @@ void	iter( T& container, F map ) {
 	}
 }
 
-template <typename T, typename F, typename F_Wrapper>
-void	iter( T& container, F map, F_Wrapper* wrapper ) {
+//* I tried creating a closure (as a type) but it got too ugly and too verbose...
+template <typename T, typename FPTR, typename F_Wrapper>
+void	iter( T& container, FPTR map, F_Wrapper& wrapper ) {
 	typename T::iterator	it;
 	typename T::iterator	end_it;
 
@@ -63,7 +64,7 @@ void	iter( T& container, F map, F_Wrapper* wrapper ) {
 	end_it = container.end();
 
 	while (it != end_it) {
-		(wrapper->*map)(*it);
+		(wrapper.*map)(*it);
 		it++;
 	}
 }
