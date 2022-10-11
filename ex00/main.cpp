@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:51:57 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/11 18:59:00 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:12:37 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int main(int argc, char const *argv[])
 	
 	std::vector<int>	v(CONTAINER_SIZE);
 
-	//*............Making container.............
+	//*............Making a container.............
 	srand(time(NULL));
-	s_elRandom<int>	randomer	= s_elRandom<int>(42);
+	s_elRandom<int>	randomer = s_elRandom<int>(42);
 	::iter(v, &s_elRandom<int>::elRandom_int, randomer);
 	std::cout << "vector is" << std::endl;
 	::iter(v, print_el<int>);

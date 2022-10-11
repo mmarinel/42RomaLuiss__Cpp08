@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:59:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/10 16:55:36 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:12:20 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * @return const T& 
  */
 template <typename T>
-const int&	easyfind( const T& container, int to_find ) {
+int	easyfind( const T& container, int to_find ) {
 	typename T::const_iterator	it;
 	typename T::const_iterator	end_it;
 
@@ -38,7 +38,7 @@ const int&	easyfind( const T& container, int to_find ) {
 		if (*it == to_find)
 		{
 			std::cout << YELLOW << "occurrence found at pos " << it - container.cbegin() << RESET << std::endl;
-			return (*it);
+			return (static_cast<int>(*it));
 		}
 		it++;
 	}
