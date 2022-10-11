@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/11 22:11:10 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:23:04 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Span::Span() : _max_size(0)
 	_content = std::vector<int>();
 }
 
-Span::Span( const Span &copy )
+Span::Span( const Span &copy ) : _max_size(copy._max_size)
 {
 	*this = copy;
 }
@@ -36,16 +36,16 @@ Span::~Span()
 
 
 // Operators
-Span & Span::operator=(const Span &assign) : _max_size(assign._max_size)
+Span & Span::operator=(const Span &assign)
 {
-	std::vector<int>::const_iterator	ass_begin = assign.cbegin();
-	std::vector<int>::const_iterator	ass_end = assign.end();
+	std::vector<int>::const_iterator	ass_begin = assign._content.cbegin();
+	std::vector<int>::const_iterator	ass_end = assign._content.end();
 
 	this->~Span();
 	new (this) Span(assign._max_size);
 	
-	for ( std::vector<int>::const_iterator it = begin; it < end; it++)
-		_conent.push_back(*it);
+	for ( std::vector<int>::const_iterator it = ass_begin; it < ass_end; it++)
+		_content.push_back(*it);
 
 	return (*this);
 }
@@ -54,7 +54,7 @@ Span & Span::operator=(const Span &assign) : _max_size(assign._max_size)
 // Getters / Setters
 unsigned int Span::getSize() const
 {
-	return _size;
+	return _max_size;
 }
 
 //* Logic
@@ -63,22 +63,22 @@ void	Span::addNumber( int nbr ) {
 		throw MaxSizeExcept();
 	else
 		_content.insert(
-			std::upper_bound(_content.begin(), content.end(), nbr),
-			item
+			std::upper_bound(_content.begin(), _content.end(), nbr),
+			nbr
 		);
 }
 bool	Span::span_admissible( void ) {
 	return (_content.size() > 1);
 }
 unsigned int	Span::shortest_span( void ) {
-	if (span_admissible) {
+	if (span_admissible()) {
 		unsigned int
 			shortest = std::numeric_limits<int>::max();
 		std::vector<int>::const_iterator
 			it;
 
 		for ( it = _content.cbegin() + 1; it < _content.cend(); it++)
-			if (std::abs( *it - *(it - 1) ) < shortest)
+			if (std::abs( *it - *(it - 1) ) < int(shortest))
 				shortest = *it - *(it - 1);
 
 		return (shortest);
@@ -86,16 +86,24 @@ unsigned int	Span::shortest_span( void ) {
 	else
 		throw NoSpanExcept();
 }
-usnigned int	Span::longest_span( void ) {
-	if (span_admissible) {
+unsigned int	Span::longest_span( void ) {
+	if (span_admissible()) {
 		return ( *(_content.cend() - 1) -  *_content.cbegin() );
 	}
 	else
 		throw NoSpanExcept();
 }
-void	Span::fill( std::vector<int> nbrs ) {
-	
+void	Span::fill(
+	std::vector<int>::const_iterator begin,
+	std::vector<int>::const_iterator end
+)
+{
+	std::vector<int>::const_iterator	it;
+
+	for ( it = begin; it < end; it++ )
+		this->addNumber(*it);
 }
+
 // Exceptions
 const char * Span::NoSpanExcept::what() const throw()
 {

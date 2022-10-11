@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:43:33 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/11 22:09:12 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:23:23 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string>
 # include <vector>
 # include <algorithm>
+# include <iterator>
 # include <cmath>
 
 class Span
@@ -38,7 +39,10 @@ class Span
 		
 		//* Logic
 		void				addNumber( int nbr );
-		void				fill( std::vector<int> nbrs );
+		void				fill(
+			std::vector<int>::const_iterator	begin,
+			std::vector<int>::const_iterator	end
+		);
 		unsigned int		shortest_span( void );
 		unsigned int		longest_span( void );
 
