@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/11 23:23:04 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:54:10 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,32 @@ void	Span::fill(
 	for ( it = begin; it < end; it++ )
 		this->addNumber(*it);
 }
+
+//* iterators
+std::vector<int>::const_iterator	Span::cbegin() const {
+	return (_content.cbegin());
+}
+std::vector<int>::const_iterator	Span::cend() const {
+	return (_content.cend());
+}
+std::vector<int>::iterator	Span::begin() {
+	return (_content.begin());
+}
+std::vector<int>::iterator	Span::end() {
+	return (_content.end());
+}
+
+//* other operators
+
+std::ostream&	operator<<(std::ostream& stream, const Span& span) {
+	std::vector<int>::const_iterator	it;
+
+	for ( it = span.cbegin(); it < span.cend(); it++ ) 
+		stream << it - span.cbegin() << "-th element: " << *it << std::endl;
+	
+	return (stream);
+}
+
 
 // Exceptions
 const char * Span::NoSpanExcept::what() const throw()
