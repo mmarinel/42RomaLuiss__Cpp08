@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 00:54:10 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/12 02:45:06 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	Span::addNumber( int nbr ) {
 bool	Span::span_admissible( void ) {
 	return (_content.size() > 1);
 }
-unsigned int	Span::shortest_span( void ) {
+unsigned int	Span::shortestSpan( void ) {
 	if (span_admissible()) {
 		unsigned int
 			shortest = std::numeric_limits<int>::max();
@@ -86,7 +86,7 @@ unsigned int	Span::shortest_span( void ) {
 	else
 		throw NoSpanExcept();
 }
-unsigned int	Span::longest_span( void ) {
+unsigned int	Span::longestSpan( void ) {
 	if (span_admissible()) {
 		return ( *(_content.cend() - 1) -  *_content.cbegin() );
 	}
