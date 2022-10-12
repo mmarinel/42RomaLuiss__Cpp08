@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 06:00:12 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/12 06:12:49 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ class MutantStack
 			bool					operator!=( const iterator& other );
 			const T&				operator*();
 			const T&				operator[]( int offset );
+			iterator				operator+( size_t offset );
+			iterator				operator-( size_t offset );
 			iterator&				operator++();
 			iterator				operator++( int placeholder );
 			iterator&				operator--();
 			iterator				operator--( int placeholder );
 			iterator&				operator+=( size_t offset );
 			iterator&				operator-=( size_t offset );
-			iterator&				operator+( size_t offset );
-			iterator&				operator-( size_t offset );
 			bool					operator>( size_t offset );
 			bool					operator<( size_t offset );
 			bool					operator>=( size_t offset );
