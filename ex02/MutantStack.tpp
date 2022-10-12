@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 05:42:23 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:33:06 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ MutantStack<T>::~MutantStack<T>() {}
 
 template <typename T>
 const MutantStack<T>&	MutantStack<T>::operator=( const MutantStack<T>& assign ) {
+	for (size_t i = 0; i < _stack.size(); i++)
+		_stack.pop();
 	_stack = assign._stack;
 }
 
