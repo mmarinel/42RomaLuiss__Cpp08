@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 22:08:21 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/12 22:27:49 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ const typename MutantStack<T>::iterator&
 	}
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator==( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator==( const iterator& other ) const {
 	return (_backup == other._backup && _traversed == other._traversed);
 }
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator!=( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator!=( const iterator& other ) const {
 	return (_backup != other._backup || _traversed != other._traversed);
 }
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator>( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator>( const iterator& other ) const {
 	return (
 		_backup.size() < other._backup.size()
 		&&
@@ -81,7 +81,7 @@ bool	MutantStack<T>::iterator::operator>( const iterator& other ) {
 }
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator<( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator<( const iterator& other ) const {
 	return (
 		_backup.size() > other._backup.size()
 		&&
@@ -90,12 +90,12 @@ bool	MutantStack<T>::iterator::operator<( const iterator& other ) {
 }
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator>=( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator>=( const iterator& other ) const {
 	return ( *this > other || *this == other);
 }
 
 template <typename T>
-bool	MutantStack<T>::iterator::operator<=( const iterator& other ) {
+bool	MutantStack<T>::iterator::operator<=( const iterator& other ) const {
 	return ( *this < other || *this == other);
 }
 
