@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 12:50:25 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:03:38 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ const T&	MutantStack<T>::iterator::operator*() {
 
 template <typename T>
 const T&	MutantStack<T>::iterator::operator[]( int offset ) {
-	if (offset < 0 || offset > size() - 1)
-		throw (std::out_of_range());
+	if (offset < 0 || offset > _backup.size() - 1)
+		throw (std::out_of_range(RED "out_of_range excpt: MutantStack operator[]" RESET));
 	else
 		return (*(this + offset));
 }
@@ -128,9 +128,9 @@ typename MutantStack<T>::iterator
 		iterator	new_it;
 
 		if (offset < 0 || offset > _backup.size() - 1)
-			throw (std::out_of_range());
+			throw (std::out_of_range(RED "out_of_range excpt: MutantStack operator[]" RESET));
 		else {
-			new_it = *it;//* Copies current (this) iterator into new one
+			new_it = *new_it;//* Copies current (this) iterator into new one
 			while (offset--)
 			{
 				new_it._traversed.push(new_it._backup.top());
@@ -149,9 +149,9 @@ typename MutantStack<T>::iterator
 			return (this->operator+(-offset));
 		else {
 			if ( offset > _traversed().size() - 1)
-				throw (std::out_of_range());
+				throw (std::out_of_range(RED "out_of_range excpt: MutantStack operator[]" RESET));
 			else {
-				new_it = *it;//* Copies current (this) iterator into new one
+				new_it = *new_it;//* Copies current (this) iterator into new one
 				while (offset--)
 				{
 					new_it._backup.push(new_it._traversed.top());
@@ -170,7 +170,7 @@ __SIZE_TYPE__
 		offset = other._backup.size() - this->_backup.size();
 		if (offset < 0
 			|| other + offset != *this)
-			throw (std::invalid_argument());
+			throw (std::invalid_argument(RED "invalid_argument excpt: MutantStack operator-" RESET));
 		else
 			return (offset);
 	}

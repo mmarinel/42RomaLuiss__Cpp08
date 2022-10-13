@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 12:53:51 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:01:17 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <string>
 # include <stack>
 # include <stdexcept>
+
+# include "../colors.hpp"
 
 template <typename T>
 class MutantStack
