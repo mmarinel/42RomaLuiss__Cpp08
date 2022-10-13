@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 20:32:48 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:28:11 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //* Constructors and destructor
 template <typename T>
 MutantStack<T>::iterator::~iterator() {
-	this->it.template std::deque<T>::~iterator();
+	this->it.~iterator();
 }
 
 template <typename T>
