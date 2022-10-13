@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 19:49:19 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:21:43 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@
 # include <iostream>
 # include <string>
 # include <stack>
+# include <deque>
 # include <stdexcept>
 
 # include "../colors.hpp"
 
 template <typename T>
-class MutantStack //: public std::stack<T>
+class MutantStack : public std::stack<T>
 {
 	public:
 		struct	iterator {
 			public:
 				// Constructors
-				iterator( void );
-				iterator( std::stack<T> s );
+				iterator();
+				iterator( typename std::deque<T>::iterator it );
 				iterator( const iterator& to_copy );
 				
 				// Destructors
@@ -55,8 +56,7 @@ class MutantStack //: public std::stack<T>
 				iterator&				operator-=( size_t offset );
 			
 			private:
-				std::stack<T>	_backup;
-				std::stack<T>	_traversed;
+				typename std::deque<T>::iterator	it;
 		};
 		
 		// Constructors
@@ -80,17 +80,11 @@ class MutantStack //: public std::stack<T>
 		//* iterators
 		iterator	begin( void );
 		iterator	end( void );
-		
-	private:
-		std::stack<T> _stack;
-		
 };
 
 // Stream operators
 template <typename T>
 std::ostream& operator<<( std::ostream &stream, const MutantStack<T> &mut_stack );
-// template <typename T>
-// std::ostream& operator<<( std::ostream &stream, const typename MutantStack<T>::iterator &it );
 
 # include "MutantStack.tpp"
 # include "MutantStack.iterator.tpp"

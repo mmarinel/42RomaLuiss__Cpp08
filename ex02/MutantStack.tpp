@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 17:55:47 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:18:53 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@
 # include "MutantStack.hpp"
 
 template <typename T>
-MutantStack<T>::MutantStack() {
-	_stack = std::stack<T>();
-}
+MutantStack<T>::MutantStack() : std::stack<T>() {}
 
 template <typename T>
-MutantStack<T>::MutantStack( size_t size ) {
-	this->_stack = std::stack<T>();
-
+MutantStack<T>::MutantStack( size_t size ) : std::stack<T>() {
 	for (size_t i = 0; i < size; i++)
-		this->_stack.push(T());
+		this->c.push_back(T());
 }
 
 template <typename T>
@@ -35,41 +31,41 @@ MutantStack<T>::MutantStack( const MutantStack& copy ) {
 
 template <typename T>
 MutantStack<T>::~MutantStack<T>() {
-	for (size_t i = 0; i < _stack.size(); i++)
-		_stack.pop();
+	for (size_t i = 0; i < this->c.size(); i++)
+		this->c.pop_front();
 }
 
 template <typename T>
 const MutantStack<T>&	MutantStack<T>::operator=( const MutantStack<T>& assign ) {
 	this->~MutantStack();
-	_stack = assign._stack;
+	this->c = assign.c;
 
 	return (*this);
 }
 
 template <typename T>
 const T&	MutantStack<T>::top( void ) const {
-	return (_stack.top());
+	return (this->c.top());
 }
 
 template <typename T>
 bool	MutantStack<T>::empty( void ) const {
-	return (_stack.empty());
+	return (this->c.empty());
 }
 
 template <typename T>
 __SIZE_TYPE__	MutantStack<T>::size( void ) const {
-	return (_stack.size());
+	return (this->c.size());
 }
 
 template <typename T>
 void	MutantStack<T>::push( T& el ) {
-	_stack.push(el);
+	this->c.push_back(el);
 }
 
 template <typename T>
 void	MutantStack<T>::pop( void ) {
-	_stack.pop();
+	this->c.pop_front();
 }
 
 /**
@@ -82,7 +78,7 @@ void	MutantStack<T>::pop( void ) {
  */
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::begin( void ) {
-	return (iterator(_stack));
+	return (iterator(this->std::stack<T>::begin()));
 }
 
 /**
@@ -95,7 +91,7 @@ typename MutantStack<T>::iterator	MutantStack<T>::begin( void ) {
  */
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::end( void ) {
-	return (iterator());
+	return (iterator(this->std::stack<T>::end()));
 }
 
 template <typename T>
