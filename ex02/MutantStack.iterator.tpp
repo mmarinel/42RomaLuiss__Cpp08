@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 22:27:49 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 12:50:25 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,32 @@ MutantStack<T>::iterator::~iterator() {
 		_traversed.pop();
 }
 
+/**
+ * @brief returns a new iterator pointing past the last element of the given stack
+ * 
+ * @tparam T 
+ */
 template <typename T>
 MutantStack<T>::iterator::iterator( void ) {
 	_backup = std::stack<T>();
 	_traversed = std::stack<T>();
 }
 
+/**
+ * @brief returns a new iterator pointing to the first element of the given stack
+ * 
+ * @tparam T 
+ * @param s 
+ */
 template <typename T>
 MutantStack<T>::iterator::iterator( std::stack<T> s ) {
-	_backup = std::stack<T>();
-	_traversed = s;
+	_backup = s;
+	_traversed = std::stack<T>();
 }
 
 template <typename T>
 MutantStack<T>::iterator::iterator( const iterator& to_copy ) {
-	_backup = to_copy._backup;
-	_traversed = to_copy._traversed;
+	*this = to_copy;
 }
 
 
@@ -85,7 +95,7 @@ bool	MutantStack<T>::iterator::operator<( const iterator& other ) const {
 	return (
 		_backup.size() > other._backup.size()
 		&&
-		*this + (_backup._backup.size() - other._backup.size()) == other
+		*this + (_backup.size() - other._backup.size()) == other
 	);
 }
 
@@ -121,14 +131,13 @@ typename MutantStack<T>::iterator
 			throw (std::out_of_range());
 		else {
 			new_it = *it;//* Copies current (this) iterator into new one
-			while (offset)
+			while (offset--)
 			{
 				new_it._traversed.push(new_it._backup.top());
 				new_it._backup.pop();
-				offset -= 1;
 			}
-		}
 			return (new_it);
+		}
 	}
 
 template <typename T>
@@ -137,21 +146,33 @@ typename MutantStack<T>::iterator
 		iterator	new_it;
 
 		if (offset < 0)
-			return (this->operator-(-offset));
+			return (this->operator+(-offset));
 		else {
 			if ( offset > _traversed().size() - 1)
 				throw (std::out_of_range());
 			else {
 				new_it = *it;//* Copies current (this) iterator into new one
-				while (offset)
+				while (offset--)
 				{
 					new_it._backup.push(new_it._traversed.top());
 					new_it._traversed.pop();
-					offset -= 1;
 				}
+				return (new_it);
 			}
-			return (new_it);
 		}
+	}
+
+template <typename T>
+__SIZE_TYPE__
+	MutantStack<T>::iterator::operator-( const iterator& other ) {
+		int	offset;
+
+		offset = other._backup.size() - this->_backup.size();
+		if (offset < 0
+			|| other + offset != *this)
+			throw (std::invalid_argument());
+		else
+			return (offset);
 	}
 
 template <typename T>
@@ -175,7 +196,7 @@ typename MutantStack<T>::iterator&
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 template <typename T>
-typename MutantStack<T>::iterator&
+typename MutantStack<T>::iterator
 	MutantStack<T>::iterator::operator++( int placeholder ) {
 		iterator	old_it;
 		
@@ -186,14 +207,14 @@ typename MutantStack<T>::iterator&
 	}
 
 template <typename T>
-typename MutantStack<T>::iterator&
+typename MutantStack<T>::iterator
 	MutantStack<T>::iterator::operator--( int placeholder ) {
 		iterator	old_it;
 		
 		old_it = *this;
 		*this = *this - 1;
 
-		return  (old_it);
+		return (old_it);
 	}
 #pragma GCC diagnostic pop
 

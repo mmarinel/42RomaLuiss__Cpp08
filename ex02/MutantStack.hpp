@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 22:28:38 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 12:53:51 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ class MutantStack
 			const T&				operator[]( int offset );
 			iterator				operator+( size_t offset );
 			iterator				operator-( size_t offset );
+			__SIZE_TYPE__			operator-( const iterator& other );
 			iterator&				operator++();
 			iterator				operator++( int placeholder );
 			iterator&				operator--();
@@ -66,11 +67,11 @@ class MutantStack
 		const MutantStack& operator=( const MutantStack &assign );
 		
 		//* Logic
-		const T&		top( void );
-		bool			empty( void );
-		__SIZE_TYPE__	size( void );
-		void			push( T el );
-		T&				pop( void );
+		const T&		top( void ) const;
+		bool			empty( void ) const;
+		__SIZE_TYPE__	size( void ) const;
+		void			push( T& el );
+		void			pop( void );
 		
 		//* iterators
 		iterator	begin( void );
@@ -82,7 +83,10 @@ class MutantStack
 };
 
 // Stream operators
-// std::ostream & operator<<( std::ostream &stream, const MutantStack &object );
+template <typename T>
+std::ostream& operator<<( std::ostream &stream, const MutantStack<T> &mut_stack );
+// template <typename T>
+// std::ostream& operator<<( std::ostream &stream, const typename MutantStack<T>::iterator &it );
 
 # include "MutantStack.tpp"
 # include "MutantStack.iterator.tpp"
