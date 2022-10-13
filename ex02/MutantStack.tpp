@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 15:20:25 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:55:47 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ template <typename T>
 const MutantStack<T>&	MutantStack<T>::operator=( const MutantStack<T>& assign ) {
 	this->~MutantStack();
 	_stack = assign._stack;
+
+	return (*this);
 }
 
 template <typename T>
@@ -104,6 +106,8 @@ std::ostream& operator<<( std::ostream &stream, const MutantStack<T> &mut_stack 
 
 	for (it = begin; it < end; it++)
 		stream << it -  begin << "th element: " << *it << std::endl;
+
+	return (stream);
 }
 
 #endif

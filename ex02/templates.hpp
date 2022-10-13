@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 00:38:35 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:34:41 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	iter( T& container, FPTR map, F_Wrapper& wrapper ) {
 	it = container.begin();
 	end_it = container.end();
 
-	while (it != end_it) {
+	while ( it != end_it ) {
 		(wrapper.*map)(*it);
 		it++;
 	}

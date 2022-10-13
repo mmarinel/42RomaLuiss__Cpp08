@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 15:37:39 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:53:29 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ T&	MutantStack<T>::iterator::operator[]( int offset ) {
 
 template <typename T>
 typename MutantStack<T>::iterator
-	MutantStack<T>::iterator::operator+( size_t offset ) {
+	MutantStack<T>::iterator::operator+( size_t offset ) const {
 		iterator	new_it;
 
 		if (offset < 0 || offset > _backup.size() - 1)
@@ -142,7 +142,7 @@ typename MutantStack<T>::iterator
 
 template <typename T>
 typename MutantStack<T>::iterator
-	MutantStack<T>::iterator::operator-( size_t offset ) {
+	MutantStack<T>::iterator::operator-( size_t offset ) const {
 		iterator	new_it;
 
 		if (offset < 0)
@@ -164,7 +164,7 @@ typename MutantStack<T>::iterator
 
 template <typename T>
 __SIZE_TYPE__
-	MutantStack<T>::iterator::operator-( const iterator& other ) {
+	MutantStack<T>::iterator::operator-( const iterator& other ) const {
 		int	offset;
 
 		offset = other._backup.size() - this->_backup.size();
@@ -181,7 +181,7 @@ typename MutantStack<T>::iterator&
 
 		*this = *this + 1;
 
-		return  (*this);
+		return (*this);
 	}
 
 template <typename T>

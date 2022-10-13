@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 15:35:27 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:49:19 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../colors.hpp"
 
 template <typename T>
-class MutantStack
+class MutantStack //: public std::stack<T>
 {
 	public:
 		struct	iterator {
@@ -44,9 +44,9 @@ class MutantStack
 				bool					operator<=( const iterator& other ) const;
 				T&						operator*();
 				T&						operator[]( int offset );
-				iterator				operator+( size_t offset );
-				iterator				operator-( size_t offset );
-				__SIZE_TYPE__			operator-( const iterator& other );
+				iterator				operator+( size_t offset ) const;
+				iterator				operator-( size_t offset ) const;
+				__SIZE_TYPE__			operator-( const iterator& other )  const;
 				iterator&				operator++();
 				iterator				operator++( int placeholder );
 				iterator&				operator--();

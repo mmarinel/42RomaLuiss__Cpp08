@@ -6,7 +6,7 @@
 #    By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:34:54 by earendil          #+#    #+#              #
-#    Updated: 2022/10/12 03:48:42 by mmarinel         ###   ########.fr        #
+#    Updated: 2022/10/13 17:24:45 by mmarinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ exercise: .BUILD
 
 run: .RUN
 	@echo $(CYAN) "\nTests running\n" $(RESET)
-	@leaks --atExit -- ./$(NAME)
+	@leaks --atExit -- ./$(NAME) 10 42
 
 all:
 	@$(MAKE_REC) -C ..
