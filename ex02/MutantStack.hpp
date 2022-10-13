@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 13:01:17 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:35:27 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,45 @@
 template <typename T>
 class MutantStack
 {
-	struct	iterator {
-		public:
-			// Constructors
-			iterator( void );
-			iterator( std::stack<T> s );
-			iterator( const iterator& to_copy );
-			
-			// Destructors
-			~iterator();
-			
-			// Operators
-			const iterator&			operator=( const iterator& to_copy );
-			bool					operator==( const iterator& other ) const;
-			bool					operator!=( const iterator& other ) const;
-			bool					operator>( const iterator& other ) const;
-			bool					operator<( const iterator& other ) const;
-			bool					operator>=( const iterator& other ) const;
-			bool					operator<=( const iterator& other ) const;
-			const T&				operator*();
-			const T&				operator[]( int offset );
-			iterator				operator+( size_t offset );
-			iterator				operator-( size_t offset );
-			__SIZE_TYPE__			operator-( const iterator& other );
-			iterator&				operator++();
-			iterator				operator++( int placeholder );
-			iterator&				operator--();
-			iterator				operator--( int placeholder );
-			iterator&				operator+=( size_t offset );
-			iterator&				operator-=( size_t offset );
-
-		private:
-			std::stack<T>	_backup;
-			std::stack<T>	_traversed;
-	};
 	public:
+		struct	iterator {
+			public:
+				// Constructors
+				iterator( void );
+				iterator( std::stack<T> s );
+				iterator( const iterator& to_copy );
+				
+				// Destructors
+				~iterator();
+				
+				// Operators
+				const iterator&			operator=( const iterator& to_copy );
+				bool					operator==( const iterator& other ) const;
+				bool					operator!=( const iterator& other ) const;
+				bool					operator>( const iterator& other ) const;
+				bool					operator<( const iterator& other ) const;
+				bool					operator>=( const iterator& other ) const;
+				bool					operator<=( const iterator& other ) const;
+				T&						operator*();
+				T&						operator[]( int offset );
+				iterator				operator+( size_t offset );
+				iterator				operator-( size_t offset );
+				__SIZE_TYPE__			operator-( const iterator& other );
+				iterator&				operator++();
+				iterator				operator++( int placeholder );
+				iterator&				operator--();
+				iterator				operator--( int placeholder );
+				iterator&				operator+=( size_t offset );
+				iterator&				operator-=( size_t offset );
+			
+			private:
+				std::stack<T>	_backup;
+				std::stack<T>	_traversed;
+		};
+		
 		// Constructors
 		MutantStack();
+		MutantStack( size_t size );
 		MutantStack( const MutantStack &copy );
 		
 		// Destructor

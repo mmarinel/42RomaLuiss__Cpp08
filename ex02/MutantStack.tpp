@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 12:54:46 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:20:25 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 template <typename T>
 MutantStack<T>::MutantStack() {
 	_stack = std::stack<T>();
+}
+
+template <typename T>
+MutantStack<T>::MutantStack( size_t size ) {
+	this->_stack = std::stack<T>();
+
+	for (size_t i = 0; i < size; i++)
+		this->_stack.push(T());
 }
 
 template <typename T>
