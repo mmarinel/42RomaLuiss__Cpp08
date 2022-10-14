@@ -6,11 +6,12 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 19:50:56 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 22:24:23 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+# include "span_utils.hpp"
 
 // Constructors
 Span::Span() : _max_size(0)
@@ -69,16 +70,17 @@ bool	Span::span_admissible( void ) {
 }
 unsigned int	Span::shortestSpan( void ) {
 	if (span_admissible()) {
-		unsigned int
-			shortest = std::numeric_limits<int>::max();
-		std::vector<int>::iterator
-			it;
+		return (minSpan<int>(*this));
+		// unsigned int
+		// 	shortest = std::numeric_limits<int>::max();
+		// std::vector<int>::iterator
+		// 	it;
 
-		for ( it = _content.begin() + 1; it < _content.end(); it++)
-			if (std::abs( *it - *(it - 1) ) < int(shortest))
-				shortest = *it - *(it - 1);
+		// for ( it = _content.begin() + 1; it < _content.end(); it++)
+		// 	if (std::abs( *it - *(it - 1) ) < int(shortest))
+		// 		shortest = *it - *(it - 1);
 
-		return (shortest);
+		// return (shortest);
 	}
 	else
 		throw NoSpanExcept();
