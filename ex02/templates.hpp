@@ -6,12 +6,14 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 12:45:56 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:10:22 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEMPLATES_H
 #define TEMPLATES_H
+
+# include "Awesome.hpp"
 
 # include <unistd.h>
 # include <iostream>
@@ -107,6 +109,10 @@ inline std::string	random_string( int len ) {
 	}
 
 	return (str);
+}
+
+inline Awesome	random_awesome( int nbr ) {
+	return (Awesome( std::rand() & (nbr + 1)));
 }
 
 #endif /* TEMPLATES_H */
