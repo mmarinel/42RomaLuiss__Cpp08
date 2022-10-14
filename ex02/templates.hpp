@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 17:34:41 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:40:18 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <iostream>
 # include <cstdlib>
+
+# define safe_delete(o) {delete o; o = nullptr;}
 
 template <typename T>
 struct s_elRandom {
@@ -70,8 +72,13 @@ void	iter( T& container, FPTR map, F_Wrapper& wrapper ) {
 }
 
 template <typename T>
-void	print_el( T el ) {
+inline void	print_el( T el ) {
 	std::cout << el << std::endl;
+}
+
+template <typename T>
+inline void	placement_delete( T* o ) {
+	o->~T();
 }
 
 #endif /* TEMPLATES_H */

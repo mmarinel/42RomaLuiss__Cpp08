@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 20:18:53 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:48:17 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	MutantStack<T>::pop( void ) {
  */
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::begin( void ) {
-	return (iterator(this->std::stack<T>::begin()));
+	return (iterator(this->c.begin()));
 }
 
 /**
@@ -91,14 +91,15 @@ typename MutantStack<T>::iterator	MutantStack<T>::begin( void ) {
  */
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::end( void ) {
-	return (iterator(this->std::stack<T>::end()));
+	return (iterator(this->c.end()));
 }
 
 template <typename T>
 std::ostream& operator<<( std::ostream &stream, const MutantStack<T> &mut_stack ) {
+	MutantStack<T>						copy = mut_stack;//* we need copy because begin is not a const function, so we cannot call it on mut_stack
 	typename MutantStack<T>::iterator	it;
-	typename MutantStack<T>::iterator	begin = mut_stack.begin();
-	typename MutantStack<T>::iterator	end = mut_stack.end();
+	typename MutantStack<T>::iterator	begin = copy.begin();
+	typename MutantStack<T>::iterator	end = copy.end();
 
 	for (it = begin; it < end; it++)
 		stream << it -  begin << "th element: " << *it << std::endl;

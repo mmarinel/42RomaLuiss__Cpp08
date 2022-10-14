@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 22:28:11 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:45:29 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define MUTANTSTACK_ITERATOR_H
 
 # include "MutantStack.hpp"
+# include "templates.hpp"
 
 //* Constructors and destructor
 template <typename T>
 MutantStack<T>::iterator::~iterator() {
-	this->it.~iterator();
+	placement_delete(&this->it);
 }
 
 template <typename T>
@@ -134,7 +135,7 @@ typename MutantStack<T>::iterator
 		iterator	old_it;
 		
 		old_it = *this;
-		*this++;
+		*this += 1;
 
 		return  (old_it);
 	}
@@ -145,7 +146,7 @@ typename MutantStack<T>::iterator
 		iterator	old_it;
 		
 		old_it = *this;
-		*this--;
+		*this -= 1;
 
 		return (old_it);
 	}

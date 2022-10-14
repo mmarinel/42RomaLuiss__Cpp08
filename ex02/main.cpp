@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:53:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 17:32:33 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:49:08 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 		
 		srand(time(NULL));
 		::iter(stack, &s_elRandom<int>::elRandom_int, randomer);
-		std::cout << stack;
+		std::cout << stack << std::endl;
 	}
 	return 0;
 }
