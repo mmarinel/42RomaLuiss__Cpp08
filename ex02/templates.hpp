@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 13:10:22 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:06:14 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <iostream>
 # include <cstdlib>
+# include <algorithm>
 
 # define safe_delete(o) {delete o; o = nullptr;}
 
@@ -99,10 +100,13 @@ inline int	random_int( int limit ) {
 }
 
 inline std::string	random_string( int len ) {
-	std::string	str;
+	std::string		str;
+	size_t			real_len;
+	const size_t	STR_MAX_LEN = 50;
 
-	str = std::string(len, '\0');
-	for ( int i = 0; i < len; i++) {
+	real_len = std::min<size_t>(len, STR_MAX_LEN);
+	str = std::string(real_len, '\0');
+	for ( size_t i = 0; i < real_len; i++) {
 		do {
 			str[i] = static_cast<char>(rand() % std::numeric_limits<char>::max());
 		} while (false == std::isprint(str[i]));

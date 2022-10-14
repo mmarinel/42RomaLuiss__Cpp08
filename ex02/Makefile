@@ -6,7 +6,7 @@
 #    By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:34:54 by earendil          #+#    #+#              #
-#    Updated: 2022/10/13 17:24:45 by mmarinel         ###   ########.fr        #
+#    Updated: 2022/10/14 16:05:31 by mmarinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,19 @@ MAKE_REC:= @make --no-print-directory
 exercise: .BUILD
 
 run: .RUN
-	@echo $(CYAN) "\nTests running\n" $(RESET)
+	@echo $(CYAN) "\nTests running\n\n" $(RESET)
+	@echo $(CYAN) "\nSubject tests\n\n" $(RESET)
+	@leaks --atExit -- ./$(NAME)
+	@read -p "Press any key to continue..."; clear
+	@echo $(CYAN) "\nTesting containers with 10 elements\n\n" $(RESET)
 	@leaks --atExit -- ./$(NAME) 10 42
+	@read -p "Press any key to continue..."; clear
+	@echo $(CYAN) "\nTesting containers with 100 elements\n\n" $(RESET)
+	@leaks --atExit -- ./$(NAME) 100 420
+	@read -p "Press any key to continue..."; clear
+	@echo $(CYAN) "\nTesting containers with 100000 elements\n\n" $(RESET)
+	@leaks --atExit -- ./$(NAME) 100000 420000
+	@read -p "Press any key to continue..."; clear
 
 all:
 	@$(MAKE_REC) -C ..

@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 12:24:51 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:47:24 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ class MutantStack : public std::stack<T>
 		const T&		top( void ) const;
 		bool			empty( void ) const;
 		__SIZE_TYPE__	size( void ) const;
-		void			push( T& el );
+		void			push( T el );
 		void			pop( void );
 		
 		//* iterators
