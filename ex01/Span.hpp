@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:43:33 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 02:43:58 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:23:32 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Span
 {
 	public:
 		typedef std::vector<int>::iterator iterator;
-		typedef std::vector<int>::const_iterator const_iterator;
 
 		// Constructors
 		Span();
@@ -43,16 +42,14 @@ class Span
 		//* Logic
 		void				addNumber( int nbr );
 		void				fill(
-			std::vector<int>::const_iterator	begin,
-			std::vector<int>::const_iterator	end
+			std::vector<int>::iterator	begin,
+			std::vector<int>::iterator	end
 		);
 		unsigned int		shortestSpan( void );
 		unsigned int		longestSpan( void );
 
 		//* iterators
-		std::vector<int>::const_iterator	cbegin() const;
 		std::vector<int>::iterator			begin();
-		std::vector<int>::const_iterator	cend() const;
 		std::vector<int>::iterator			end();
 
 		// Exceptions

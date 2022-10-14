@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 22:39:35 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 02:56:29 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:24:44 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int main( int argc, const char* argv[])
 
 		//* Filling container
 		::iter(vec, &s_elRandom<int>::elRandom_int, randomer);
-		container.fill(vec.cbegin(), vec.cend());
+		container.fill(vec.begin(), vec.end());
 
 		//* Printing output
 		std::cout << container << std::endl;
+		// exit(0);
 		std::cout
 			<< YELLOW
 			<< "shortest span: "

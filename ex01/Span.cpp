@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/12 02:45:06 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:50:56 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,17 @@ Span::Span( unsigned int max_size ) : _max_size(max_size)
 // Destructor
 Span::~Span()
 {
+	_content.erase(_content.begin(), _content.end());
 }
 
 
 // Operators
-Span & Span::operator=(const Span &assign)
+Span & Span::operator=( const Span &assign )
 {
-	std::vector<int>::const_iterator	ass_begin = assign._content.cbegin();
-	std::vector<int>::const_iterator	ass_end = assign._content.end();
-
 	this->~Span();
 	new (this) Span(assign._max_size);
 	
-	for ( std::vector<int>::const_iterator it = ass_begin; it < ass_end; it++)
-		_content.push_back(*it);
+	this->_content = assign._content;
 
 	return (*this);
 }
@@ -74,10 +71,10 @@ unsigned int	Span::shortestSpan( void ) {
 	if (span_admissible()) {
 		unsigned int
 			shortest = std::numeric_limits<int>::max();
-		std::vector<int>::const_iterator
+		std::vector<int>::iterator
 			it;
 
-		for ( it = _content.cbegin() + 1; it < _content.cend(); it++)
+		for ( it = _content.begin() + 1; it < _content.end(); it++)
 			if (std::abs( *it - *(it - 1) ) < int(shortest))
 				shortest = *it - *(it - 1);
 
@@ -88,29 +85,23 @@ unsigned int	Span::shortestSpan( void ) {
 }
 unsigned int	Span::longestSpan( void ) {
 	if (span_admissible()) {
-		return ( *(_content.cend() - 1) -  *_content.cbegin() );
+		return ( *(_content.end() - 1) -  *_content.begin() );
 	}
 	else
 		throw NoSpanExcept();
 }
 void	Span::fill(
-	std::vector<int>::const_iterator begin,
-	std::vector<int>::const_iterator end
+	std::vector<int>::iterator begin,
+	std::vector<int>::iterator end
 )
 {
-	std::vector<int>::const_iterator	it;
+	std::vector<int>::iterator	it;
 
 	for ( it = begin; it < end; it++ )
 		this->addNumber(*it);
 }
 
 //* iterators
-std::vector<int>::const_iterator	Span::cbegin() const {
-	return (_content.cbegin());
-}
-std::vector<int>::const_iterator	Span::cend() const {
-	return (_content.cend());
-}
 std::vector<int>::iterator	Span::begin() {
 	return (_content.begin());
 }
@@ -121,10 +112,14 @@ std::vector<int>::iterator	Span::end() {
 //* other operators
 
 std::ostream&	operator<<(std::ostream& stream, const Span& span) {
-	std::vector<int>::const_iterator	it;
+	Span						span_copy = span;
+	// exit(0);//! !!!!!!!!!!!!
+	std::vector<int>::iterator	start = span_copy.begin();
+	std::vector<int>::iterator	end = span_copy.end();
+	std::vector<int>::iterator	it;
 
-	for ( it = span.cbegin(); it < span.cend(); it++ ) 
-		stream << it - span.cbegin() << "-th element: " << *it << std::endl;
+	for ( it = start; it < end; it++ ) 
+		stream << it - start << "th element: " << *it << std::endl;
 	
 	return (stream);
 }
