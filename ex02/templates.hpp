@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 16:06:14 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:22:34 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ inline std::string	random_string( int len ) {
 }
 
 inline Awesome	random_awesome( int nbr ) {
-	return (Awesome( std::rand() & (nbr + 1)));
+	return (Awesome( std::rand() % (nbr + 1)));
 }
 
 #endif /* TEMPLATES_H */
