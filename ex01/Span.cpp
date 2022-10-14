@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:44:43 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 22:24:23 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 23:14:15 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ std::vector<int>::iterator	Span::end() {
 
 std::ostream&	operator<<(std::ostream& stream, const Span& span) {
 	Span						span_copy = span;
-	// exit(0);//! !!!!!!!!!!!!
 	std::vector<int>::iterator	start = span_copy.begin();
 	std::vector<int>::iterator	end = span_copy.end();
 	std::vector<int>::iterator	it;
