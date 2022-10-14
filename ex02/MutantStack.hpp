@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:08:47 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/13 20:21:43 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:15:48 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class MutantStack : public std::stack<T>
 			public:
 				// Constructors
 				iterator();
-				iterator( typename std::deque<T>::iterator it );
+				iterator( typename std::deque<T>::iterator& it );
 				iterator( const iterator& to_copy );
 				
 				// Destructors

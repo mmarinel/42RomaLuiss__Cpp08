@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 11:45:29 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:15:51 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ MutantStack<T>::iterator::iterator() {
 }
 
 template <typename T>
-MutantStack<T>::iterator::iterator( typename std::deque<T>::iterator it ) {
+MutantStack<T>::iterator::iterator( typename std::deque<T>::iterator& it ) {
 	this->it = it;
 }
 
@@ -94,19 +94,31 @@ T&	MutantStack<T>::iterator::operator[]( int offset ) {
 template <typename T>
 typename MutantStack<T>::iterator
 	MutantStack<T>::iterator::operator+( size_t offset ) const {
-		return (this->it + offset);
+		iterator	new_it;
+
+		new_it = *this;
+		new_it.it = new_it.it + offset;
+		return (new_it);
 	}
 
 template <typename T>
 typename MutantStack<T>::iterator
 	MutantStack<T>::iterator::operator-( size_t offset ) const {
-		return (this->it - offset);
+		iterator	new_it;
+
+		new_it = *this;
+		new_it.it = new_it.it - offset;
+		return (new_it);
 	}
 
 template <typename T>
 __SIZE_TYPE__
 	MutantStack<T>::iterator::operator-( const iterator& other ) const {
-		return (this->it - other.it);
+		iterator	new_it;
+
+		new_it = *this;
+		new_it.it = new_it.it - other.it;
+		return (new_it);
 	}
 
 template <typename T>
@@ -135,9 +147,9 @@ typename MutantStack<T>::iterator
 		iterator	old_it;
 		
 		old_it = *this;
-		*this += 1;
+		this->operator++();
 
-		return  (old_it);
+		return (old_it);
 	}
 
 template <typename T>
@@ -146,7 +158,7 @@ typename MutantStack<T>::iterator
 		iterator	old_it;
 		
 		old_it = *this;
-		*this -= 1;
+		this->operator--();
 
 		return (old_it);
 	}

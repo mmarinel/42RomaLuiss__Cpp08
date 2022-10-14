@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 11:48:17 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:18:55 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 
 # include "MutantStack.hpp"
 
+/**
+ * @brief initializes stack as empty
+ * 
+ * @tparam T 
+ */
 template <typename T>
 MutantStack<T>::MutantStack() : std::stack<T>() {}
 
+/**
+ * @brief initializes stack as having [size] elements default initialized
+ * 
+ * @tparam T 
+ * @param size 
+ */
 template <typename T>
 MutantStack<T>::MutantStack( size_t size ) : std::stack<T>() {
 	for (size_t i = 0; i < size; i++)
@@ -32,7 +43,7 @@ MutantStack<T>::MutantStack( const MutantStack& copy ) {
 template <typename T>
 MutantStack<T>::~MutantStack<T>() {
 	for (size_t i = 0; i < this->c.size(); i++)
-		this->c.pop_front();
+		this->c.pop_back();
 }
 
 template <typename T>
@@ -65,13 +76,12 @@ void	MutantStack<T>::push( T& el ) {
 
 template <typename T>
 void	MutantStack<T>::pop( void ) {
-	this->c.pop_front();
+	this->c.pop_back();
 }
 
 /**
  * @brief this function returns an iterator
  * pointing to the first element of the mutant stack.
- * The current stack is copied inside the iterator.
  * 
  * @tparam T 
  * @return MutantStack<T>::iterator 
@@ -84,7 +94,6 @@ typename MutantStack<T>::iterator	MutantStack<T>::begin( void ) {
 /**
  * @brief this function returns an iterator
  * pointing past the last element of the mutant stack.
- * The iterator gets an empty stack.
  * 
  * @tparam T 
  * @return MutantStack<T>::iterator 
@@ -96,7 +105,8 @@ typename MutantStack<T>::iterator	MutantStack<T>::end( void ) {
 
 template <typename T>
 std::ostream& operator<<( std::ostream &stream, const MutantStack<T> &mut_stack ) {
-	MutantStack<T>						copy = mut_stack;//* we need copy because begin is not a const function, so we cannot call it on mut_stack
+	//* we need copy because begin is not a const function, so we cannot call it on mut_stack
+	MutantStack<T>						copy = mut_stack;
 	typename MutantStack<T>::iterator	it;
 	typename MutantStack<T>::iterator	begin = copy.begin();
 	typename MutantStack<T>::iterator	end = copy.end();
