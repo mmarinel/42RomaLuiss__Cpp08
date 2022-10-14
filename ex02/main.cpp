@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:53:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 11:49:08 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:49:36 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,38 @@ int main(int argc, char const *argv[])
 {
 	if (argc == 3)
 	{
-		const size_t		CONTAINER_SIZE = std::atoi(argv[1]);
-		const size_t		RAND_LIMIT = std::atoi(argv[2]);
-		MutantStack<int>	stack(CONTAINER_SIZE);
-		s_elRandom<int>		randomer = s_elRandom<int>(RAND_LIMIT);
-		
-		srand(time(NULL));
-		::iter(stack, &s_elRandom<int>::elRandom_int, randomer);
-		std::cout << stack << std::endl;
+		{
+			std::cout << GREEN "|||| int tests" RESET << std::endl;
+			//* ************************************************
+			
+			const size_t		CONTAINER_SIZE = std::atoi(argv[1]);
+			const size_t		RAND_LIMIT = std::atoi(argv[2]);
+			MutantStack<int>	stack(CONTAINER_SIZE);
+			s_elRandom<int>		randomer = s_elRandom<int>(RAND_LIMIT, &random_int);
+			
+			srand(time(NULL));
+			::iter(stack, &s_elRandom<int>::elRandom_ref, randomer);
+			std::cout << YELLOW << "printing stack using iterator (FIRST RUN)" << RESET << std::endl;
+			std::cout << stack << std::endl;
+			std::cout << YELLOW << "printing stack using iterator (SECOND RUN)" << RESET << std::endl;
+			std::cout << stack << std::endl;
+		}
+		{
+			std::cout << GREEN "||| std::string tests" RESET << std::endl;
+			//* ************************************************
+			
+			const size_t				CONTAINER_SIZE = std::atoi(argv[1]);
+			const size_t				RAND_LIMIT = std::atoi(argv[2]);
+			MutantStack<std::string>	stack(CONTAINER_SIZE);
+			s_elRandom<std::string>		randomer = s_elRandom<std::string>(RAND_LIMIT, &random_string);
+			
+			srand(time(NULL));
+			::iter(stack, &s_elRandom<std::string>::elRandom_ref, randomer);
+			std::cout << YELLOW << "printing stack using iterator (FIRST RUN)" << RESET << std::endl;
+			std::cout << stack << std::endl;
+			std::cout << YELLOW << "printing stack using iterator (SECOND RUN)" << RESET << std::endl;
+			std::cout << stack << std::endl;
+		}
 	}
 	return 0;
 }

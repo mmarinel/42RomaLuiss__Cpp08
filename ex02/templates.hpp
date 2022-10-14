@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 11:40:18 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:45:56 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,36 @@
 
 template <typename T>
 struct s_elRandom {
+	
+	typedef T(*rand_el)(int);
+	
 	public:
 		//* Constructors
-		s_elRandom( int limit ) : _limit(limit) {}
+		s_elRandom( int limit, rand_el rand_handle ) : _limit(limit), _rand_handle(rand_handle) {}
 		
-		//* Logic
 		/**
-		 * @brief this function fills a container of ints with values ranging in [0, limit].
+		 * @brief this function returns a random element of type T.
+		 * It assumes seed has already been set.
+		 * 
+		 * @tparam T 
+		 * @return T 
+		 */
+		T	elRandom_ret( void ) {
+			return (_rand_handle(_limit));
+		}
+		/**
+		 * @brief this function sets arg to a random value of type T.
 		 * It assumes seed has already been set.
 		 * 
 		 * @tparam T 
 		 * @param el 
-		 * @return T 
 		 */
-		T	elRandom_int( T& el ) {
-			el = static_cast<T>(std::rand() % (_limit + 1));
-			return (el);
+		void	elRandom_ref( T& el ) {
+			el = _rand_handle(_limit);
 		}
 	private:
-		const int	_limit;
+		const int		_limit;//* interpretation changes based on concrete instantiation of type T
+		const rand_el	_rand_handle;
 };
 
 template <typename T, typename FPTR>
@@ -79,6 +90,23 @@ inline void	print_el( T el ) {
 template <typename T>
 inline void	placement_delete( T* o ) {
 	o->~T();
+}
+
+inline int	random_int( int limit ) {
+	return ( std::rand() % (limit + 1) );
+}
+
+inline std::string	random_string( int len ) {
+	std::string	str;
+
+	str = std::string(len, '\0');
+	for ( int i = 0; i < len; i++) {
+		do {
+			str[i] = static_cast<char>(rand() % std::numeric_limits<char>::max());
+		} while (false == std::isprint(str[i]));
+	}
+
+	return (str);
 }
 
 #endif /* TEMPLATES_H */
