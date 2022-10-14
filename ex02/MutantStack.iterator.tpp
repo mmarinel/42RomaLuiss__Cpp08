@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 05:08:06 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 12:15:51 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:24:58 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ MutantStack<T>::iterator::iterator() {
 }
 
 template <typename T>
-MutantStack<T>::iterator::iterator( typename std::deque<T>::iterator& it ) {
+MutantStack<T>::iterator::iterator( typename std::deque<T>::iterator it ) {
 	this->it = it;
 }
 
@@ -114,11 +114,10 @@ typename MutantStack<T>::iterator
 template <typename T>
 __SIZE_TYPE__
 	MutantStack<T>::iterator::operator-( const iterator& other ) const {
-		iterator	new_it;
+		__SIZE_TYPE__	diff;
 
-		new_it = *this;
-		new_it.it = new_it.it - other.it;
-		return (new_it);
+		diff = this->it - other.it;
+		return (diff);
 	}
 
 template <typename T>
