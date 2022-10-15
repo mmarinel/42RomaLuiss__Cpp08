@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:59:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 17:41:51 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:26:48 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <stdexcept>
+# include <algorithm>
 
 # include "../colors.hpp"
 
@@ -28,29 +29,20 @@
  * @return const T& 
  */
 template <typename T>
-int	easyfind( const T& container, int to_find ) {
-	typename T::const_iterator	it;
-	typename T::const_iterator	begin_it;
-	typename T::const_iterator	end_it;
+int	easyfind( T& container, int to_find ) {
+	typename T::iterator	it;
+	typename T::iterator	start = container.begin();
+	typename T::iterator	end = container.end();
 
-	begin_it = container.cbegin();
-	end_it = container.cend();
-
-	it = begin_it;
-	while (it != end_it) {
-		if (*it == to_find)
-		{
-			std::cout
-				<< YELLOW
-				<< "occurrence found at pos "
-				<< it - begin_it
-				<< RESET
-				<< std::endl;
-			return (static_cast<int>(*it));
-		}
-		it++;
+	it = find(start, end, to_find);
+	if ( it != end ) {
+		std::cout << YELLOW
+			<< to_find << " found at position: " << it - start
+			<< RESET << std::endl;
+		return (*it);
 	}
-	throw std::exception();
+	else
+		throw std::out_of_range("easyfind: " RED "el not found" RESET);
 }
 
 #endif /* TEMPLATES_H */

@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:51:57 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/11 19:12:37 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:28:14 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 		std::cout << easyfind(v, TO_FIND) << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cout << RED << "el could not be found" << RESET << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
