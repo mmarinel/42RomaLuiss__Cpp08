@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:53:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 16:13:11 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:43:14 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 # include "templates.hpp"
 # include "Awesome.hpp"
 
-# include <iostream>
-# include <string>
-# include <cstdlib>
-# include <time.h>
+# include <algorithm>
+# include <vector>
 # include <list>
 
-void	subject_tests( void );
+# include <iostream>
+# include <string>
+
+# include <cstdlib>
+# include <time.h>
+
+static void	subject_tests( void );
+static inline int	random_int( int limit );
+static inline std::string	random_string( int len );
+static inline Awesome	random_awesome( int nbr );
 //* end of static declarations
 
 int main(int argc, char const *argv[])
@@ -37,7 +44,7 @@ int main(int argc, char const *argv[])
 			s_elRandom<int>		randomer = s_elRandom<int>(RAND_LIMIT, &random_int);
 			
 			srand(time(NULL));
-			::iter(stack, &s_elRandom<int>::elRandom_ref, randomer);
+			std::for_each(stack.begin(), stack.end(), randomer);
 			std::cout << YELLOW << "printing stack using iterator (FIRST RUN)" << RESET << std::endl;
 			std::cout << stack << std::endl;
 			std::cout << YELLOW << "printing stack using iterator (SECOND RUN)" << RESET << std::endl;
@@ -54,7 +61,7 @@ int main(int argc, char const *argv[])
 			s_elRandom<std::string>		randomer = s_elRandom<std::string>(RAND_LIMIT, &random_string);
 			
 			srand(time(NULL));
-			::iter(stack, &s_elRandom<std::string>::elRandom_ref, randomer);
+			std::for_each(stack.begin(), stack.end(), randomer);
 			std::cout << YELLOW << "printing stack using iterator (FIRST RUN)" << RESET << std::endl;
 			std::cout << stack << std::endl;
 			std::cout << YELLOW << "printing stack using iterator (SECOND RUN)" << RESET << std::endl;
@@ -71,7 +78,7 @@ int main(int argc, char const *argv[])
 			s_elRandom<Awesome>			randomer = s_elRandom<Awesome>(RAND_LIMIT, &random_awesome);
 			
 			srand(time(NULL));
-			::iter(stack, &s_elRandom<Awesome>::elRandom_ref, randomer);
+			std::for_each(stack.begin(), stack.end(), randomer);
 			std::cout << YELLOW << "printing stack using iterator (FIRST RUN)" << RESET << std::endl;
 			std::cout << stack << std::endl;
 			std::cout << YELLOW << "printing stack using iterator (SECOND RUN)" << RESET << std::endl;
@@ -89,7 +96,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-void	subject_tests( void ) {
+static void	subject_tests( void ) {
 	{
 		std::cout << GREEN "||| testing with MutantStack" RESET << std::endl;
 		//* ************************************************
@@ -149,4 +156,28 @@ void	subject_tests( void ) {
 		}
 	}
 	std::cout << std::endl;
+}
+
+static inline int	random_int( int limit ) {
+	return ( std::rand() % (limit + 1) );
+}
+
+static inline std::string	random_string( int len ) {
+	std::string		str;
+	size_t			real_len;
+	const size_t	STR_MAX_LEN = 50;
+
+	real_len = std::min<size_t>(len, STR_MAX_LEN);
+	str = std::string(real_len, '\0');
+	for ( size_t i = 0; i < real_len; i++) {
+		do {
+			str[i] = static_cast<char>(rand() % std::numeric_limits<char>::max());
+		} while (false == std::isprint(str[i]));
+	}
+
+	return (str);
+}
+
+static inline Awesome	random_awesome( int nbr ) {
+	return (Awesome( std::rand() % (nbr + 1)));
 }
