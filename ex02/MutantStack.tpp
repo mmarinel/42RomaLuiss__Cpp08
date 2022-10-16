@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:34:44 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 15:52:36 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/16 19:08:27 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ const MutantStack<T>&	MutantStack<T>::operator=( const MutantStack<T>& assign ) 
 
 template <typename T>
 const T&	MutantStack<T>::top( void ) const {
-	return (this->c.front());
+	return (this->c.back());
 }
 
 template <typename T>

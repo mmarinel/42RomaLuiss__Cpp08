@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 04:53:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/16 14:43:14 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/16 19:08:50 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ static void	subject_tests( void ) {
 		mstack.push_back(5);
 		mstack.push_back(17);
 		
-		std::cout << mstack.front() << std::endl;
+		std::cout << mstack.back() << std::endl;
 		mstack.pop_back();
 		std::cout << mstack.size() << std::endl;
 		
