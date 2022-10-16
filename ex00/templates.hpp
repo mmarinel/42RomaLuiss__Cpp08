@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:42 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/16 13:01:31 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:20:41 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ struct s_elRandom {
 
 	public:
 		//* Constructors
-		s_elRandom( int limit ) : _limit(limit) {}
+		s_elRandom( int limit, t_at_random at_random ) : _limit(limit), _at_random(at_random) {}
 		
 		void	operator() ( T& el ) {
-			el = at_random(std::rand() % (_limit + 1));
+			el = _at_random( _limit + 1 );
 		}
 		
 	private:
 		const int	_limit;
-		t_at_random	at_random;
+		t_at_random	_at_random;
 };
 
 template <typename T>

@@ -6,7 +6,7 @@
 #    By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:11:58 by earendil          #+#    #+#              #
-#    Updated: 2022/09/12 12:08:58 by mmarinel         ###   ########.fr        #
+#    Updated: 2022/10/16 14:17:24 by mmarinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ fclean:
 		make --no-print-directory -C $$DIR fclean; \
 	done;
 	@echo Exercises destroyed!
+	@sleep 0.5; clear
 
 re: fclean all
 
