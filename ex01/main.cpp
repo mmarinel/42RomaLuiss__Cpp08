@@ -6,7 +6,7 @@
 /*   By: mmarinel <mmarinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 22:39:35 by mmarinel          #+#    #+#             */
-/*   Updated: 2022/10/14 19:24:44 by mmarinel         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:28:30 by mmarinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,26 @@
 # include "templates.hpp"
 # include "../colors.hpp"
 
+# include <algorithm>
+# include <vector>
+
 # include <iostream>
 # include <string>
 
 # include <stdlib.h>
 # include <time.h>
+
+/**
+ * @brief this function returns a random integer in range [-rand_lim, rand_lim].
+ *  It assumes seed has already been set.
+ * 
+ * @param rand_lim 
+ * @return int 
+ */
+static int	rand_int( int rand_lim ) {
+	return ( std::pow(-1, rand() % 2) * ( rand() % ( rand_lim + 1 ) ) );
+}
+//* end of static declarations
 
 int main( int argc, const char* argv[])
 {
@@ -30,15 +45,14 @@ int main( int argc, const char* argv[])
 		const size_t		CONTAINER_VALRANGE = std::atoi(argv[2]);
 		Span				container(CONTAINER_SIZE);
 		std::vector<int>	vec = std::vector<int>(CONTAINER_SIZE);
-		s_elRandom<int>		randomer(CONTAINER_VALRANGE);
+		s_elRandom<int>		randomer(CONTAINER_VALRANGE, &rand_int);
 
 		//* Filling container
-		::iter(vec, &s_elRandom<int>::elRandom_int, randomer);
+		std::for_each(vec.begin(), vec.end(), randomer);
 		container.fill(vec.begin(), vec.end());
 
 		//* Printing output
 		std::cout << container << std::endl;
-		// exit(0);
 		std::cout
 			<< YELLOW
 			<< "shortest span: "
